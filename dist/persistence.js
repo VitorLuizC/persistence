@@ -1,23 +1,41 @@
-export default function createPersistence(name, options = {}) {
-    const { storage = window.localStorage, timeout, placeholder, } = options;
-    return {
-        set(value) {
-            const state = JSON.stringify({
-                value,
-                updatedAt: Date.now()
-            });
-            storage.setItem(name, state);
+(function (global, factory) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+    typeof define === 'function' && define.amd ? define(factory) :
+    (global.persistence = factory());
+}(this, (function () { 'use strict';
+
+    function createPersistence(name, options) {
+      if ( options === void 0 ) options = {};
+
+      var storage = options.storage; if ( storage === void 0 ) storage = window.localStorage;
+      var timeout = options.timeout;
+      var placeholder = options.placeholder;
+      return {
+        set: function set(value) {
+          var state = JSON.stringify({
+            value: value,
+            updatedAt: Date.now()
+          });
+          storage.setItem(name, state);
         },
-        get() {
-            const state = storage.getItem(name);
-            if (state === null)
-                return placeholder;
-            const { updatedAt, value } = JSON.parse(state);
-            const isExpired = timeout && Date.now() > (updatedAt + timeout);
-            return isExpired ? placeholder : value;
+
+        get: function get() {
+          var state = storage.getItem(name);
+          if (state === null) { return placeholder; }
+          var ref = JSON.parse(state);
+          var updatedAt = ref.updatedAt;
+          var value = ref.value;
+          var isExpired = timeout && Date.now() > updatedAt + timeout;
+          return isExpired ? placeholder : value;
         },
-        delete() {
-            storage.removeItem(name);
+
+        delete: function delete$1() {
+          storage.removeItem(name);
         }
-    };
-}
+
+      };
+    }
+
+    return createPersistence;
+
+})));

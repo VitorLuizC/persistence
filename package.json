@@ -2,11 +2,16 @@
   "name": "@vitorluizc/persistence",
   "version": "0.0.0",
   "description": "",
-  "main": "dist/persistence.js",
+  "cdn": "dist/persistence.js",
+  "main": "dist/persistence.cjs.js",
   "types": "dist/persistence.d.ts",
+  "unpkg": "dist/persistence.js",
+  "module": "dist/persistence.es.js",
+  "jsdelivr": "dist/persistence.js",
+  "umd:main": "dist/persistence.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc"
+    "build": "tsc && bili dist/persistence.js --format es,cjs,umd --js buble"
   },
   "repository": {
     "type": "git",
@@ -23,6 +28,7 @@
   },
   "homepage": "https://github.com/VitorLuizC/persistence#readme",
   "devDependencies": {
+    "bili": "^3.4.2",
     "typescript": "^3.2.2"
   }
 }
