@@ -9,6 +9,7 @@
   "module": "dist/persistence.es.js",
   "jsdelivr": "dist/persistence.js",
   "umd:main": "dist/persistence.js",
+  "files": ["dist/"],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc && bili dist/persistence.js --format es,cjs,umd --js buble"
