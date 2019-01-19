@@ -1,36 +1,52 @@
-interface PersistenceOptions {
+export interface PersistenceOptions <T = any> {
   storage?: Storage;
   timeout?: number;
-  placeholder?: any;
+  placeholder?: T;
 }
 
-export default function createPersistence (name: string, options: PersistenceOptions = {}) {
-  const {
+export interface Persistence <T = any, U = (T | undefined)> {
+  set (value: T): void;
+  get (): T | U;
+  delete (): void;
+}
+
+const createPersistence: {
+  <T = any, U = T> (
+    name: string,
+    options: PersistenceOptions & { placeholder: U; },
+  ): Persistence<T, U>;
+
+  <T = any, U = (T | undefined)> (
+    name: string,
+    options?: PersistenceOptions<U>,
+  ): Persistence<T, U>;
+} = (
+  name: string, {
     storage = window.localStorage,
     timeout,
     placeholder,
-  } = options;
+  }: PersistenceOptions = {}
+): Persistence => ({
+  set (value) {
+    const state = JSON.stringify({
+      value,
+      updatedAt: Date.now()
+    });
+    storage.setItem(name, state);
+  },
 
-  return {
-    set (value: any): void {
-      const state = JSON.stringify({
-        value,
-        updatedAt: Date.now()
-      });
-      storage.setItem(name, state);
-    },
+  get () {
+    const state = storage.getItem(name);
+    if (state === null)
+      return placeholder;
+    const { updatedAt, value } = JSON.parse(state);
+    const isExpired = timeout !== undefined && Date.now() > (updatedAt + timeout);
+    return isExpired ? placeholder : value;
+  },
 
-    get (): any {
-      const state = storage.getItem(name);
-      if (state === null)
-        return placeholder;
-      const { updatedAt, value } = JSON.parse(state);
-      const isExpired = timeout && Date.now() > (updatedAt + timeout);
-      return isExpired ? placeholder : value;
-    },
+  delete () {
+    storage.removeItem(name);
+  }
+});
 
-    delete (): void {
-      storage.removeItem(name);
-    }
-  };
-}
+export default createPersistence;
