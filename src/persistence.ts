@@ -85,8 +85,8 @@ const createPersistence: {
       const state = storage.getItem(name);
       if (state === null)
         return placeholder;
-      const register = JSON.parse(state) as { updatedAt: number, value: any };
-      return isExpired(register.updatedAt) ? placeholder : register.value;
+      const record = JSON.parse(state) as { updatedAt: number, value: any };
+      return isExpired(record.updatedAt) ? placeholder : record.value;
     },
 
     delete: () => storage.removeItem(name)
