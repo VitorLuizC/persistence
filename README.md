@@ -1,5 +1,10 @@
 # `@vitorluizc/persistence`
 
+[![Build Status](https://travis-ci.org/VitorLuizC/persistence.svg?branch=master)](https://travis-ci.org/VitorLuizC/persistence)
+[![License](https://badgen.net/github/license/VitorLuizC/persistence)](./LICENSE)
+[![Library minified size](https://badgen.net/bundlephobia/min/@vitorluizc/persistence)](https://bundlephobia.com/result?p=@vitorluizc/persistence)
+[![Library minified + gzipped size](https://badgen.net/bundlephobia/minzip/@vitorluizc/persistence)](https://bundlephobia.com/result?p=@vitorluizc/persistence)
+
 Persistence provides a pretty easy API to handle Storage's implementations.
 
 - :zap: Pretty fast and **smaller than 0.3KB** (minified + gzipped ESM);
