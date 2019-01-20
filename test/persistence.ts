@@ -34,48 +34,58 @@ test('API: animate returns Animation', (context) => {
   context.is(typeof persistence.delete, 'function');
 });
 
-test('Persistence: Uses key as namespace to storage value', (context) => {
-  const key = 'value';
+test('Persistence: `get`, `set` and `delete` works as intendend', (context) => {
+  const key = 'storage.name';
+  const valueA = 10000,
+        valueB = 20000;
+
+  storage._state[key] = `{ "value": ${valueA} }`;
 
   const persistence: Persistence<number> = createPersistence(key, { storage });
 
-  persistence.set(12);
+  context.is(persistence.get(), valueA);
 
-  context.is(typeof storage._state[key], 'string');
+  persistence.set(valueB);
+
+  context.is(persistence.get(), valueB);
 
   const state = JSON.parse(storage._state[key]);
 
-  context.is(state.value, 12);
+  context.is(state.value, valueB);
 
   persistence.delete();
 
   context.is(storage._state[key], undefined);
 });
 
-test('Persistence: get() returns value from storage', (context) => {
-  const key = 'value';
+test('Persistence: You can define a timeout to storage\'s value', async (context) => {
+  const time = 1000;
+  const persistence: Persistence<{ name: string; }> = createPersistence('user', {
+    storage,
+    timeout: time // Timeouts storage's value in 1 second.
+  });
 
-  storage._state[key] = `{ "value": 10000 }`;
+  persistence.set({ name: 'Vitor' });
+  context.deepEqual(persistence.get(), { name: 'Vitor' });
 
-  const persistence: Persistence<number> = createPersistence(key, { storage });
+  await new Promise((resolve) => setTimeout(resolve, time));
 
-  context.is(persistence.get(), 10000);
-
-  persistence.set(20000);
-
-  context.is(persistence.get(), 20000);
+  context.is(persistence.get(), undefined);
 });
 
-test('Persistence: set() saves value to storage', (context) => {
-  const key = 'value';
+test('Persistence: You can define a placeholder to storage\'s value', (context) => {
+  const persistence: Persistence<boolean> = createPersistence('isAllowed', {
+    storage,
+    placeholder: false
+  });
 
-  const persistence: Persistence<number> = createPersistence(key, { storage });
+  context.false(persistence.get());
 
-  persistence.set(12);
+  persistence.set(true);
 
-  context.is(persistence.get(), 12);
+  context.true(persistence.get());
 
-  persistence.set(50); // Overwrites value.
+  persistence.delete();
 
-  context.is(persistence.get(), 50);
+  context.false(persistence.get());
 });
