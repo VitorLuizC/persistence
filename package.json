@@ -28,6 +28,17 @@
   "bugs": {
     "url": "https://github.com/VitorLuizC/persistence/issues"
   },
+  "keywords": [
+    "localstorage",
+    "sessionstorage",
+    "storage",
+    "storage-engine",
+    "indexeddb",
+    "typescript",
+    "javascript",
+    "ava",
+    "bili"
+  ],
   "homepage": "https://github.com/VitorLuizC/persistence#readme",
   "devDependencies": {
     "ava": "^1.1.0",
