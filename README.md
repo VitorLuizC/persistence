@@ -32,7 +32,7 @@ This module has an UMD bundle available through JSDelivr and Unpkg CDNs.
 
 It exports a factory function to create persistence. A persistence can easily `set`, `get` and `delete` JSON parseable values to any `Storage` implementation (ex. `SessionStorage` and `LocalStorage`).
 
-```js
+```ts
 import createPersistence from '@vitorluizc/persistence';
 
 const persistence = createPersistence<string>('Name', {
