@@ -1,6 +1,6 @@
 {
   "name": "@vitorluizc/persistence",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Persistence provides a pretty easy API to handle Storage's implementations.",
   "cdn": "dist/persistence.js",
   "main": "dist/persistence.cjs.js",
@@ -12,7 +12,8 @@
   "files": ["dist/"],
   "scripts": {
     "test": "ava",
-    "build": "tsc && bili dist/persistence.js --format es,cjs,umd --js buble"
+    "build": "tsc && bili dist/persistence.js --format es,cjs,umd --js buble",
+    "prepare": "yarn test && yarn build"
   },
   "repository": {
     "type": "git",
