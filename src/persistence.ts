@@ -1,8 +1,14 @@
+interface IStorage {
+  getItem (key: string): string | null;
+  setItem (key: string, value: string): void;
+  removeItem (key: string): void;
+}
+
 /**
  * Persistence options to set timeout, storage and placeholder value.
  */
 export interface PersistenceOptions <T = any> {
-  storage?: Storage;
+  storage?: IStorage;
   timeout?: number;
   placeholder?: T;
 }
