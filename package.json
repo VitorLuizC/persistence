@@ -11,7 +11,7 @@
   "umd:main": "dist/persistence.js",
   "files": ["dist/"],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "ava",
     "build": "tsc && bili dist/persistence.js --format es,cjs,umd --js buble"
   },
   "repository": {
@@ -29,7 +29,14 @@
   },
   "homepage": "https://github.com/VitorLuizC/persistence#readme",
   "devDependencies": {
+    "ava": "^1.1.0",
     "bili": "^3.4.2",
+    "ts-node": "^7.0.1",
     "typescript": "^3.2.2"
+  },
+  "ava": {
+    "require": ["ts-node/register"],
+    "extensions": ["ts"],
+    "compileEnhancements": false
   }
 }
