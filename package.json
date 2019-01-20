@@ -1,7 +1,7 @@
 {
   "name": "@vitorluizc/persistence",
   "version": "0.0.0",
-  "description": "",
+  "description": "Persistence provides a pretty easy API to handle Storage's implementations.",
   "cdn": "dist/persistence.js",
   "main": "dist/persistence.cjs.js",
   "types": "dist/persistence.d.ts",
