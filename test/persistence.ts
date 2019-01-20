@@ -1,4 +1,4 @@
-import createPersistence, { Persistence } from '../';
+import createPersistence, { Persistence } from '../src/persistence';
 import test, { beforeEach } from 'ava';
 
 const storage = {
