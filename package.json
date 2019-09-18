@@ -1,18 +1,20 @@
 {
   "name": "@vitorluizc/persistence",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Persistence provides a pretty easy API to handle Storage's implementations.",
-  "cdn": "dist/persistence.js",
-  "main": "dist/persistence.cjs.js",
+  "cdn": "dist/persistence.umd.js",
+  "main": "dist/persistence.js",
   "types": "dist/persistence.d.ts",
-  "unpkg": "dist/persistence.js",
-  "module": "dist/persistence.es.js",
-  "jsdelivr": "dist/persistence.js",
-  "umd:main": "dist/persistence.js",
-  "files": ["dist/"],
+  "unpkg": "dist/persistence.umd.js",
+  "module": "dist/persistence.esm.js",
+  "jsdelivr": "dist/persistence.umd.js",
+  "umd:main": "dist/persistence.umd.js",
+  "files": [
+    "dist/"
+  ],
   "scripts": {
     "test": "ava",
-    "build": "tsc && bili dist/persistence.js --format es,cjs,umd --js buble",
+    "build": "tsc && bili dist/persistence.js --format es,cjs,umd --minimal --module-name persistence",
     "prepare": "yarn test && yarn build"
   },
   "repository": {
@@ -41,14 +43,18 @@
   ],
   "homepage": "https://github.com/VitorLuizC/persistence#readme",
   "devDependencies": {
-    "ava": "^1.1.0",
-    "bili": "^3.4.2",
-    "ts-node": "^7.0.1",
-    "typescript": "^3.2.2"
+    "ava": "^2.4.0",
+    "bili": "^4.8.1",
+    "ts-node": "^8.4.1",
+    "typescript": "^3.6.3"
   },
   "ava": {
-    "require": ["ts-node/register"],
-    "extensions": ["ts"],
+    "require": [
+      "ts-node/register"
+    ],
+    "extensions": [
+      "ts"
+    ],
     "compileEnhancements": false
   }
 }
